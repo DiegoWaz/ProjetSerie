@@ -1,6 +1,8 @@
 const express = require("express");
 const bodyparser = require("body-parser");
 const MovieRouter = require('./routes/movies');
+const SerieRouter = require('./routes/series');
+const ActorRouter = require('./routes/actors');
 const security = require('./middleware/security');
 const securityRouter = require('./routes/security');
 const app = express();
@@ -31,6 +33,17 @@ movie1.save(function(error, result){
     console.log("save");
     console.log(result);
 });
+
+serie1.save(function(error, result){
+    console.log("save");
+    console.log(result);
+});
+
+actor1.save(function(error, result){
+    console.log("save");
+    console.log(result);
+});
+
 
 app.use(bodyparser.json());
 app.use(security.verifyToken);
