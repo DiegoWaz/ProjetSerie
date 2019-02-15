@@ -10,6 +10,6 @@ const ActorsSchema = new Schema({
 	nationality: String,
 	cityBirth: String,
 	picture: String
-})
+});
 
 module.exports = db.model("Actors", ActorsSchema);
