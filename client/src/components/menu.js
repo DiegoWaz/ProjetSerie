@@ -16,9 +16,9 @@ class Menu extends React.Component {
     }
 
     render(){
-        const {isLogged} = this.props;
+        const {user, isLogged} = this.props;
         return (
-            isLogged ? <Link onClick={this.logOut} to="/security/logout">Logout</Link> : <Link to="/security/login">Login</Link>
+            isLogged ? <Link className="nav-item nav-link" onClick={this.logOut} to="/security/logout">{isLogged} Logout</Link> : <Link className="nav-item nav-link" to="/security/login">Login</Link>
         )
     }
 }

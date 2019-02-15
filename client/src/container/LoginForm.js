@@ -22,12 +22,16 @@ export default class LoginForm extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <label>Username</label>
-                <input onKeyUp={(event) => this.handleKeyUp(event, "username")} />
-                <label>Password</label>
-                <input onKeyUp={(event) => this.handleKeyUp(event, "password")} />
-                <button type="submit">Envoyer</button>
+            <form className="form-horizontal" onSubmit={this.handleSubmit}>
+                <div className="form-group">
+                    <label for="username">Username</label>
+                    <input className="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter username" onKeyUp={(event) => this.handleKeyUp(event, "username")} />
+                </div>
+                <div className="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" onKeyUp={(event) => this.handleKeyUp(event, "password")} /> 
+                </div>
+                <button type="submit" className="btn btn-primary">Submit</button>
             </form>
         );
     }

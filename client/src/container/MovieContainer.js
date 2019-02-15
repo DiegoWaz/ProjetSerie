@@ -1,5 +1,6 @@
 import React from "react";
-import { View, Text, ActivityIndicator, FlatList } from 'react-native';
+import { View, ActivityIndicator, FlatList } from 'react-native';
+import { Card } from 'react-bootstrap';
 // import react-native-web, react-art
 export default class MovieContainer extends React.Component {
     constructor(props){
@@ -39,11 +40,26 @@ export default class MovieContainer extends React.Component {
     
         return(
             <View style={{flex: 1, paddingTop:20}}>
-            <FlatList
-                data={this.state.dataSource}
-                renderItem={({item}) => <Text>{item.title}, {item.released}, {item.year}</Text>}
-                keyExtractor={({id}, index) => id}
-            />
+            <div class="row">
+                <div class="card-group">
+                <FlatList
+                    data={this.state.dataSource}
+                    renderItem={
+                        ({item}) => 
+                            <Card>
+                                <Card.Img variant="top" src="holder.js/100px180" />
+                                <Card.Body>
+                                    <Card.Title>{item.title}</Card.Title>
+                                    <Card.Text>
+                                    {item.released}, {item.year}
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                    }
+                    keyExtractor={({id}, index) => id}
+                />
+                </div>
+                </div>
             </View>
         );
     }
