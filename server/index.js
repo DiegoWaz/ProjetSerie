@@ -1,10 +1,13 @@
 const express = require("express");
 const bodyparser = require("body-parser");
+
 const MovieRouter = require('./routes/movies');
 const SerieRouter = require('./routes/series');
 const ActorRouter = require('./routes/actors');
+
 const security = require('./middleware/security');
 const securityRouter = require('./routes/security');
+
 const app = express();
 const cors = require('cors');
 const Movie = require('./models/movie');
@@ -12,6 +15,7 @@ const Serie = require('./models/serie');
 const Actor = require('./models/actor');
 app.use(cors());
 
+/*
 const actor1 = new Actor();
 actor1.firstname = "John";
 actor1.lastname = "Doe";
@@ -43,9 +47,11 @@ actor1.save(function(error, result){
     console.log("save");
     console.log(result);
 });
+*/
 
 
 app.use(bodyparser.json());
+app.use(bodyparser.urlencoded({ extended: false }));
 app.use(security.verifyToken);
 app.use("/", securityRouter);
 app.use('/movies', MovieRouter);
