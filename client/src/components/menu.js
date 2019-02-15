@@ -1,41 +1,40 @@
 import React from "react";
+import Connection from '../components/connection';
 import Link from 'react-router-dom/Link';
-import {connect} from "react-redux";
-import {logout} from "../redux/actions/logout";
+import logo from '../logo.svg';
 
-class Menu extends React.Component {
+export default class Menu extends React.Component {
+    render() {
+        const style = {
+            maxHeight: 50
+        }
 
-    constructor(props) {
-        super(props);
-        this.logOut = this.logOut.bind(this);
-    }
-
-    logOut(event) {
-        event.preventDefault();
-        this.props.logout();
-    }
-
-    render(){
-        const {user, isLogged} = this.props;
-        return (
-            isLogged ? <Link className="nav-item nav-link" onClick={this.logOut} to="/security/logout">{isLogged} Logout</Link> : <Link className="nav-item nav-link" to="/security/login">Login</Link>
-        )
+        return <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+                  <Link className="navbar-brand" to="/">
+                    <img src={logo} className="App-logo" alt="logo" style={style} />
+                  </Link>
+                  <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                  </button>
+                  <div className="collapse navbar-collapse" id="navbarText">
+                    <ul className="navbar-nav mr-auto">
+                      <li className="nav-item">
+                        <Link className="nav-item nav-link" to="/movie">Movie</Link>
+                      </li>
+                      <li className="nav-item">
+                        <Link className="nav-item nav-link" to="/serie">Serie</Link>
+                      </li>
+                      <li className="nav-item">
+                        <Link className="nav-item nav-link" to="/createSerie">Create serie</Link>
+                      </li>
+                      <li className="nav-item">
+                        <Link className="nav-item nav-link" to="/actor">Actor</Link>
+                      </li>
+                    </ul>
+                    <span className="navbar-text">
+                      <Connection />
+                    </span>
+                  </div>
+            </nav>;
     }
 }
-
-
-const mapStateToProps = function(state, ownProps){
-    const {security: {user, isLogged}} = state;
-    return {
-        user,
-        isLogged
-    }
-}
-
-const mapDispatchToProps = function (dispatch){
-    return {
-       logout: () => dispatch(logout(dispatch))
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Menu);

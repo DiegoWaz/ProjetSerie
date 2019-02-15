@@ -2,14 +2,14 @@ import React from "react";
 import { View, ActivityIndicator, FlatList } from 'react-native';
 import { Card } from 'react-bootstrap';
 // import react-native-web, react-art
-export default class MovieContainer extends React.Component {
+export default class SerieContainer extends React.Component {
     constructor(props){
         super(props);
         this.state = {isLoading: true}
       }
 
     componentDidMount(){
-        fetch('http://localhost:3000/movies', {
+        fetch('http://localhost:3000/series', {
             method: 'GET',
             mode: "cors",
             headers: {
@@ -22,7 +22,6 @@ export default class MovieContainer extends React.Component {
               isLoading: false,
               dataSource: responseJson,
             }, function(){
-    
             });
         }).catch((error) =>{
             console.error(error);
@@ -41,23 +40,20 @@ export default class MovieContainer extends React.Component {
         return(
             <View style={{flex: 1, paddingTop:20}}>
             <div class="row">
-                <div class="card-group">
-                <FlatList
+                <FlatList className="col-md-4"
                     data={this.state.dataSource}
                     renderItem={
-                        ({item}) => 
+                        ({item}) =>
                             <Card>
                                 <Card.Body>
-                                    <Card.Title>{item.title}</Card.Title>
-                                    <Card.Text>
-                                    {item.released}, {item.year}
-                                    </Card.Text>
+                                    <Card.Title>{item.name}</Card.Title>
+                                    <Card.Text>{item.poster_path}</Card.Text>
+                                    <Card.Text>{item.country}</Card.Text>
                                 </Card.Body>
                             </Card>
                     }
                     keyExtractor={({id}, index) => id}
                 />
-                </div>
                 </div>
             </View>
         );

@@ -20,6 +20,7 @@ router.post('/', (req, res) => {
     serie1.number_of_seasons = req.body.number_of_seasons;
     serie1.poster_path = req.body.poster_path;
     serie1.country = req.body.country;
+    serie1.start_date = req.body.start_date;
 	serie1.save(function(error, result){
 	});
 	res.send(serie1);

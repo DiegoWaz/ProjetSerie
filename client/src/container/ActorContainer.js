@@ -2,14 +2,14 @@ import React from "react";
 import { View, ActivityIndicator, FlatList } from 'react-native';
 import { Card } from 'react-bootstrap';
 // import react-native-web, react-art
-export default class MovieContainer extends React.Component {
+export default class ActorContainer extends React.Component {
     constructor(props){
         super(props);
         this.state = {isLoading: true}
       }
 
     componentDidMount(){
-        fetch('http://localhost:3000/movies', {
+        fetch('http://localhost:3000/actors', {
             method: 'GET',
             mode: "cors",
             headers: {
@@ -40,25 +40,19 @@ export default class MovieContainer extends React.Component {
     
         return(
             <View style={{flex: 1, paddingTop:20}}>
-            <div class="row">
-                <div class="card-group">
                 <FlatList
                     data={this.state.dataSource}
                     renderItem={
                         ({item}) => 
-                            <Card>
-                                <Card.Body>
-                                    <Card.Title>{item.title}</Card.Title>
-                                    <Card.Text>
-                                    {item.released}, {item.year}
-                                    </Card.Text>
-                                </Card.Body>
-                            </Card>
+                        <Card>
+                            <Card.Body>
+                                <Card.Title>{item.firstname} {item.lastname}</Card.Title>
+                                <Card.Text>{item.nationality}</Card.Text>
+                            </Card.Body>
+                        </Card>
                     }
                     keyExtractor={({id}, index) => id}
                 />
-                </div>
-                </div>
             </View>
         );
     }
